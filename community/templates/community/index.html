@@ -8,7 +8,7 @@
     <p>글 번호: {{ review.pk }}</p>
     <p>글 제목: {{ review.title }}</p>
     <p>글 내용: {{ review.content }}</p>
-    <form action="{% url 'community:like' review.pk %}" method="POST">
+    <form id="like-form">
       {% csrf_token %}
       {% if user in review.like_users.all %}
         <button>좋아요 취소</button>
@@ -23,3 +23,13 @@
     <hr>
   {% endfor %}
 {% endblock %}
+
+{% block script %}
+  <script>
+    const likeForm = document.querySelector("#like-form")
+    likeForm.addEventListener((event) => {
+      event.preventDefault()
+    })
+  </script>
+{% endblock script %}
+
