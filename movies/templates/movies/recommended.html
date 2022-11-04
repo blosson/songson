@@ -1,4 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+    {% for movie in movie_list %}
+      <p>
+        <li>
+            평점: {{ movie.vote_average }} - <a href="{% url 'movies:detail' movie.pk %}">{{ movie.title }} </a>
+        </li>
+      </p>
+    {% endfor %}
+
 {% endblock %}

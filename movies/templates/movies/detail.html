@@ -1,4 +1,30 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <table>
+        <li>제목: {{ movie.title }}</li>
+       
+        <li>장르: 
+            {% comment %} {% for each_genre in genre %}
+            {{ each_genre.name }}
+            {% endfor %} {% endcomment %}
+            {% for each_genre in movie.genres.all %}
+            {{ each_genre.name }}
+            {% endfor %}
+      
+            
+        </li>
+        <li>누적 관객: {{ movie.popularity }} (백만 명)</li>
+        <li>평점: {{ movie.vote_average }}</li>
+        <li>줄거리: {{ movie.overview }}</li>
+        <img src="{{ movie.poster_path }}" alt="">
+    </table>
 {% endblock %}
+
+{% comment %} release_date = models.DateField()
+popularity = models.FloatField()
+vote_count = models.IntegerField()
+vote_average = models.FloatField()
+overview = models.TextField()
+poster_path = models.CharField(max_length=200)
+genres = models.ManyToManyField(Genre) {% endcomment %}

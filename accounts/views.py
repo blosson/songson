@@ -66,8 +66,7 @@ def follow(request, user_pk):
     if request.user.is_authenticated:
         person = get_object_or_404(get_user_model(), pk=user_pk)
         user = request.user
-        follower_count = person.followers.count()
-        following_count = person.followings.count()
+
         if person != user:
             if person.followers.filter(pk=user.pk).exists():
                 person.followers.remove(user)
@@ -75,6 +74,10 @@ def follow(request, user_pk):
             else:
                 person.followers.add(user)
                 is_followed = True
+
+            follower_count = person.followers.count()
+            following_count = person.followings.count()
+            
             context = {
                 'is_followed': is_followed,
                 'follower_count': follower_count,
